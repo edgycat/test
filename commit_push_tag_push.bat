@@ -1,4 +1,4 @@
-for /f "tokens=* usebackq" %%s in (`gnu_date`) do (set tag_name=%%s)
+for /f "tokens=* usebackq" %%s in (`gnu_date +%%Y%%m%%d-%%H%%M%%S`) do (set tag_name=%%s)
 echo %tag_name%
 
 set cfg_directory=c:\iqx\cfg\
@@ -8,6 +8,5 @@ call git add .
 call git commit -m "Genned %tag_name%"
 
 echo Tagging commit
-call git tag %tag_name%
-call git commit -m "Tagged %tag_name%"
-call git push
+call git tag "%tag_name%"
+call git push --tags
